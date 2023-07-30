@@ -6,14 +6,20 @@ module.exports = {
 	category: 'materias',
 	cooldown: 5,
 	data: new SlashCommandBuilder()
-		.setName('deletemateria')
-		.setDescription('Borra una materia')
+		.setName('editmateria')
+		.setDescription('Edita una materia')
 		.addStringOption(option =>
 			option
 				.setName('nombre')
 				.setDescription('Nombre de la materia')
 				.setRequired(true)
 				.setAutocomplete(true),
+		)
+		.addStringOption(option =>
+			option
+				.setName('nombre_editado')
+				.setDescription('Nombre editado de la materia')
+				.setRequired(true),
 		),
 	async autocomplete(interaction: AutocompleteInteraction) {
 		const focusedValue = interaction.options.getFocused();
@@ -26,11 +32,14 @@ module.exports = {
 	},
 	async execute(interaction: ChatInputCommandInteraction) {
 		const materiaName = interaction.options.getString('nombre', true);
+		const materiaEditadoName = interaction.options.getString('nombre_editado');
 
-		const rowCount = await Materia.destroy({ where: { nombre: materiaName } });
+		const [affectedRows] = await Materia.update({ nombre: materiaEditadoName }, { where: { nombre: materiaName } });
 
-		if (!rowCount) return interaction.reply('Esta materia no existe.');
+		if (affectedRows > 0) {
+			return interaction.reply(`La materia cambio a ${materiaEditadoName}`);
+		}
 
-		return interaction.reply('Materia borrada');
+		return interaction.reply('No se encontro la materia');
 	},
 };

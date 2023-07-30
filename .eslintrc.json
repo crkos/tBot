@@ -1,5 +1,5 @@
 {
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "env": {
     "node": true,
     "es6": true
@@ -7,6 +7,9 @@
   "parserOptions": {
     "ecmaVersion": 2021
   },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "root": true,
   "rules": {
     "arrow-spacing": ["warn", { "before": true, "after": true }],
     "brace-style": ["error", "stroustrup", { "allowSingleLine": true }],

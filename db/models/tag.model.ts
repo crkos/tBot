@@ -1,24 +1,24 @@
-import {Table, Column, Model, Unique, DataType, AllowNull, Default} from "sequelize-typescript";
+import { Table, Column, Model, Unique, DataType, AllowNull, Default } from 'sequelize-typescript';
 
-@Table({timestamps: true})
+@Table({ timestamps: true })
 class Tag extends Model {
-    @Unique({name: "name", msg: "Name duplicated"})
+    @Unique({ name: 'name', msg: 'Name duplicated' })
     @AllowNull(false)
     @Column(DataType.STRING)
-    name!: string
+    	name!: string;
 
     @AllowNull(false)
     @Column
-    description!: string;
+    	description!: string;
 
     @Column
-    username!: string
+    	username!: string;
 
     @Default(0)
     @AllowNull(false)
     @Column
-    usage_count!: number
+    	usage_count!: number;
 
 }
 
-export default Tag
+export default Tag;
