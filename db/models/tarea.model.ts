@@ -5,17 +5,17 @@ import Materia from './materia.model';
 class Tarea extends Model {
 	@AllowNull(false)
 	@Column
-	titulo!: string;
+		titulo!: string;
 
 	@Column
-	contenido!: string;
+		contenido!: string;
 
 	@ForeignKey(() => Materia)
 	@Column
-	materiaId!: number;
+		materiaId!: number;
 
 	@BelongsTo(() => Materia)
-	materia!: Materia; // Use 'taskMateria' instead of 'materia' for the association name.
+		materia!: Materia; // Use 'taskMateria' instead of 'materia' for the association name.
 }
 
 export default Tarea;

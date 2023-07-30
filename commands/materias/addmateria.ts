@@ -26,7 +26,8 @@ module.exports = {
 			return interaction.reply(`Se ha añadido ${materia.nombre}`);
 
 
-		} catch (error: any) {
+		}
+		catch (error: any) {
 			if (error.name === 'SequelizeUniqueConstraintError') {
 				return interaction.reply('Esta materia ya existe');
 			}

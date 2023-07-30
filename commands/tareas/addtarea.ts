@@ -27,11 +27,10 @@ module.exports = {
 				.setName('descripcion')
 				.setDescription('Descripción de la tarea')
 				.setRequired(true),
-		)
-	,
+		),
 	async autocomplete(interaction: AutocompleteInteraction) {
 		const focusedValue = interaction.options.getFocused();
-		const choices = await Materia.findAll();
+		const choices = await Materia.findAll({ where: { guildId: interaction.guildId } });
 		const onlyNames = choices.map(choice => choice.nombre);
 		const filteredNames = onlyNames.filter(name => name.startsWith(focusedValue));
 		await interaction.respond(

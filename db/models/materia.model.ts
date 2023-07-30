@@ -7,14 +7,14 @@ class Materia extends Model {
 	@Unique({ name: 'materia', msg: 'Solo puede haber una materia' })
 	@AllowNull(false)
 	@Column
-	nombre!: string;
+		nombre!: string;
 
 	@AllowNull(false)
 	@Column
-	guildId!: string;
+		guildId!: string;
 
 	@HasMany(() => Tarea)
-	tareas!: Tarea[];
+		tareas!: Tarea[];
 }
 
 export default Materia;

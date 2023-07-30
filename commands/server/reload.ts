@@ -16,7 +16,7 @@ module.exports = {
 	async autocomplete(interaction: AutocompleteInteraction) {
 		const focusedValue = interaction.options.getFocused();
 		const choices = client.commands.values();
-		let allChoices: Array<CommandAction> = [];
+		const allChoices: Array<CommandAction> = [];
 		for (const choice of choices) {
 			allChoices.push(choice);
 		}
@@ -26,8 +26,7 @@ module.exports = {
 			filteredNames.map(name => ({ name: name, value: name })),
 		);
 
-	}
-	,
+	},
 	async execute(interaction: ChatInputCommandInteraction) {
 		const commandName = interaction.options.getString('command', true).toLowerCase();
 		// @ts-ignore
@@ -46,7 +45,8 @@ module.exports = {
 			// @ts-ignore
 			interaction.client.commands.set(newCommand.data.name, newCommand);
 			await interaction.reply(`Command \`${newCommand.data.name}\` was reloaded!`);
-		} catch (error: any) {
+		}
+		catch (error: any) {
 			console.error(error);
 			await interaction.reply(`There was an error while reloading a command \`${command.data.name}\`:\n\`${error.message}\``);
 		}

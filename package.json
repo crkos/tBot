@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node --loader ts-node/esm index.ts",
-    "lint": "npx eslint ."
+    "lint": "npx eslint . --fix"
   },
   "author": "Jordan Higuera Higuera",
   "license": "ISC",

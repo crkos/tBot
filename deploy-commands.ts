@@ -34,11 +34,13 @@ const rest = new REST().setToken(process.env.DISCORD_BOT_TOKEN!);
 
 // Las rutas de abajo solo hay que utilizarlos cuando queramos borrar un comando de discord.
 
-/* for guild-based commands
-rest.delete(Routes.applicationGuildCommand(process.env.CLIENT_ID!, process.env.GUILD_ID!, 'commandId'))
-    .then(() => console.log('Successfully deleted guild command'))
-    .catch(console.error);
-
+/*
+for guild-based commands
+rest.delete(Routes.applicationGuildCommand(process.env.CLIENT_ID!, process.env.GUILD_ID!, '1134203179584724992'))
+	.then(() => console.log('Successfully deleted guild command'))
+	.catch(console.error);
+*/
+/*
  for global commands
 rest.delete(Routes.applicationCommand(process.env.GUILD_ID!, 'commandId'))
     .then(() => console.log('Successfully deleted application command'))
@@ -53,14 +55,13 @@ rest.delete(Routes.applicationCommand(process.env.GUILD_ID!, 'commandId'))
 
 		// The put method is used to fully refresh all commands in the guild with the current set
 		const data = await rest.put(
-			Routes.applicationGuildCommands(process.env.CLIENT_ID!, process.env.GUILD_ID!),
+			Routes.applicationCommands(process.env.CLIENT_ID!),
 			{ body: commands },
 		);
 
 		// @ts-ignore
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
-	}
-	catch (error) {
+	} catch (error) {
 		// And of course, make sure you catch and log any errors!
 		console.error(error);
 	}
