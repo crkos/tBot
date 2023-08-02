@@ -28,12 +28,13 @@ module.exports = {
 
 	},
 	async execute(interaction: ChatInputCommandInteraction) {
+		await interaction.deferReply();
 		const commandName = interaction.options.getString('command', true).toLowerCase();
 		// @ts-ignore
 		const command = interaction.client.commands.get(commandName);
 
 		if (!command) {
-			return interaction.reply(`There is no command with name \`${commandName}\`!`);
+			return interaction.editReply(`There is no command with name \`${commandName}\`!`);
 		}
 
 		delete require.cache[require.resolve(`../${command.category}/${command.data.name}.ts`)];
@@ -44,11 +45,10 @@ module.exports = {
 			const newCommand = require(`../${command.category}/${command.data.name}.ts`);
 			// @ts-ignore
 			interaction.client.commands.set(newCommand.data.name, newCommand);
-			await interaction.reply(`Command \`${newCommand.data.name}\` was reloaded!`);
-		}
-		catch (error: any) {
+			await interaction.editReply(`Command \`${newCommand.data.name}\` was reloaded!`);
+		} catch (error: any) {
 			console.error(error);
-			await interaction.reply(`There was an error while reloading a command \`${command.data.name}\`:\n\`${error.message}\``);
+			await interaction.editReply(`There was an error while reloading a command \`${command.data.name}\`:\n\`${error.message}\``);
 		}
 	},
 };

@@ -1,21 +1,30 @@
-import { AllowNull, BelongsTo, Column, DataType, ForeignKey, Model, NotNull, Table } from 'sequelize-typescript';
+import {
+	AllowNull,
+	BelongsTo,
+	Column,
+	ForeignKey,
+	Model,
+	Table,
+	Unique,
+} from 'sequelize-typescript';
 import Materia from './materia.model';
 
 @Table({ timestamps: true })
 class Tarea extends Model {
+	@Unique
 	@AllowNull(false)
 	@Column
-		titulo!: string;
+	titulo!: string;
 
 	@Column
-		contenido!: string;
+	contenido!: string;
 
 	@ForeignKey(() => Materia)
 	@Column
-		materiaId!: number;
+	materiaId!: number;
 
 	@BelongsTo(() => Materia)
-		materia!: Materia; // Use 'taskMateria' instead of 'materia' for the association name.
+	materia!: Materia;
 }
 
 export default Tarea;

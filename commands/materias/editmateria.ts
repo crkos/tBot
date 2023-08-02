@@ -31,15 +31,16 @@ module.exports = {
 		);
 	},
 	async execute(interaction: ChatInputCommandInteraction) {
+		await interaction.deferReply();
 		const materiaName = interaction.options.getString('nombre', true);
 		const materiaEditadoName = interaction.options.getString('nombre_editado');
 
 		const [affectedRows] = await Materia.update({ nombre: materiaEditadoName }, { where: { nombre: materiaName } });
 
 		if (affectedRows > 0) {
-			return interaction.reply(`La materia cambio a ${materiaEditadoName}`);
+			return interaction.editReply(`La materia cambio a ${materiaEditadoName}`);
 		}
 
-		return interaction.reply('No se encontro la materia');
+		return interaction.editReply('No se encontro la materia');
 	},
 };

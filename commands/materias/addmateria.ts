@@ -15,6 +15,7 @@ module.exports = {
 				.setRequired(true),
 		),
 	async execute(interaction: ChatInputCommandInteraction) {
+		await interaction.deferReply();
 		const materiaName = interaction.options.getString('nombre', true);
 
 		try {
@@ -23,17 +24,16 @@ module.exports = {
 				guildId: interaction.guildId,
 			});
 
-			return interaction.reply(`Se ha añadido ${materia.nombre}`);
+			return interaction.editReply(`Se ha añadido ${materia.nombre}`);
 
 
-		}
-		catch (error: any) {
+		} catch (error: any) {
 			if (error.name === 'SequelizeUniqueConstraintError') {
-				return interaction.reply('Esta materia ya existe');
+				return interaction.editReply('Esta materia ya existe');
 			}
 			console.log(error);
 
-			return interaction.reply('Hubo un error, intenta mas tarde');
+			return interaction.editReply('Hubo un error, intenta mas tarde');
 		}
 
 	},

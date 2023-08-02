@@ -9,10 +9,11 @@ module.exports = {
 		.setName('showmaterias')
 		.setDescription('Muestra todas las materias'),
 	async execute(interaction: ChatInputCommandInteraction) {
+		await interaction.deferReply();
 		const materiasList = await Materia.findAll({ attributes: ['nombre'], where: { guildId: interaction.guildId } });
 		const materiaString = materiasList.map(t => t.nombre).join('\n' || 'No hay materias.');
 
-		return interaction.reply(`Lista de materias: \n${materiaString}`);
+		return interaction.editReply(`Lista de materias: \n${materiaString}`);
 
 	},
 };

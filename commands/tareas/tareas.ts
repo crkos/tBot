@@ -27,7 +27,8 @@ module.exports = {
 		);
 	},
 	async execute(interaction: ChatInputCommandInteraction) {
-		const materiaName = interaction.options.getString('materia');
+		await interaction.deferReply();
+		const materiaName = interaction.options.getString('materia', true);
 		const choices = await Materia.findOne({
 			include: Tarea,
 			where: { nombre: materiaName, guildId: interaction.guildId },
@@ -35,11 +36,11 @@ module.exports = {
 		let tareaStr: string = '';
 
 		if (!choices) {
-			return interaction.reply('No existe esta materia');
+			return interaction.editReply('No existe esta materia');
 		}
 
 		if (!choices.tareas) {
-			return interaction.reply('No hay tareas para esta materia');
+			return interaction.editReply('No hay tareas para esta materia');
 		}
 
 		const tareas = choices.tareas.map(tarea => {
@@ -52,6 +53,6 @@ module.exports = {
 		}
 
 
-		return interaction.reply(`Tareas: \n${tareaStr}`);
+		return interaction.editReply(`Tareas de ${materiaName}: \n${tareaStr}`);
 	},
 };

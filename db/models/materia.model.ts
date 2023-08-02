@@ -1,4 +1,4 @@
-import { AllowNull, Column, DataType, HasMany, Model, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, Column, HasMany, Model, Table, Unique } from 'sequelize-typescript';
 import Tarea from './tarea.model';
 
 
@@ -7,14 +7,14 @@ class Materia extends Model {
 	@Unique({ name: 'materia', msg: 'Solo puede haber una materia' })
 	@AllowNull(false)
 	@Column
-		nombre!: string;
+	nombre!: string;
 
 	@AllowNull(false)
 	@Column
-		guildId!: string;
+	guildId!: string;
 
 	@HasMany(() => Tarea)
-		tareas!: Tarea[];
+	tareas!: Tarea[];
 }
 
 export default Materia;

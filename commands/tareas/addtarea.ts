@@ -38,6 +38,7 @@ module.exports = {
 		);
 	},
 	async execute(interaction: ChatInputCommandInteraction) {
+		await interaction.deferReply();
 		const materiaName = interaction.options.getString('nombre', true);
 		const tituloTarea = interaction.options.getString('titulo', true);
 		const descripcionTarea = interaction.options.getString('descripcion', true);
@@ -45,7 +46,7 @@ module.exports = {
 		const materia = await Materia.findOne({ where: { nombre: materiaName, guildId: interaction.guildId } });
 
 		if (!materia) {
-			return interaction.reply('Esta materia no existe');
+			return interaction.editReply('Esta materia no existe');
 		}
 
 		try {
@@ -54,10 +55,9 @@ module.exports = {
 				contenido: descripcionTarea,
 				materiaId: materia.id,
 			});
-			return interaction.reply(`Se ha creado la tarea con el titulo ${newTarea.titulo}`);
+			return interaction.editReply(`Se ha creado la tarea con el titulo ${newTarea.titulo}`);
 		} catch (error: any) {
-			console.log(error);
-			return interaction.reply('No se ah podido crear la tarea, intenta mas tarde.');
+			return interaction.editReply('No se ah podido crear la tarea, intenta mas tarde.');
 		}
 	},
 };

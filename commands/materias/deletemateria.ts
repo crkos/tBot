@@ -25,12 +25,13 @@ module.exports = {
 		);
 	},
 	async execute(interaction: ChatInputCommandInteraction) {
+		await interaction.deferReply();
 		const materiaName = interaction.options.getString('nombre', true);
 
 		const rowCount = await Materia.destroy({ where: { nombre: materiaName } });
 
-		if (!rowCount) return interaction.reply('Esta materia no existe.');
+		if (!rowCount) return interaction.editReply('Esta materia no existe.');
 
-		return interaction.reply('Materia borrada');
+		return interaction.editReply('Materia borrada');
 	},
 };

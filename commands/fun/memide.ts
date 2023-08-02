@@ -8,6 +8,7 @@ module.exports = {
 		.setName('memide')
 		.setDescription('¿Cuanto te mide?'),
 	async execute(interaction: ChatInputCommandInteraction) {
+		
 		const randNum = Math.floor(Math.random() * 20);
 		let strMeMide = ':';
 
