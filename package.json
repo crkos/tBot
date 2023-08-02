@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node --loader ts-node/esm index.ts",
     "lint": "npx eslint .",
-    "lint:fix": "npx eslint . --fix"
+    "lint:fix": "npx eslint . --fix",
+    "deploy:commands": "node --loader ts-node/esm deploy-commands.ts"
   },
   "author": "Jordan Higuera Higuera",
   "license": "ISC",

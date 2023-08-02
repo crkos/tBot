@@ -8,9 +8,9 @@ import { loginBot } from './utils/loginBot';
 dotenv.config();
 
 export const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
 client.commands = new Collection<string, CommandAction>();
 client.cooldowns = new Collection<string, Collection<any, any>>();
+client.user?.setActivity('Apilando Tareas');
 
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
