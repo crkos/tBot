@@ -14,7 +14,7 @@ Bot de Discord para manejar materias y tareas de escuela.
 * Mostrar todas las materias actuales.
 * Registrar tareas a materias en específico.
 * Mostrar todas las tareas de una materia en específico.
-* Borrar tareas una vez hechas (Pendiente).
+* Borrar tareas una vez hechas
 * Editar tarea (Pendiente).
 
 ## Iniciar el bot
